@@ -163,7 +163,7 @@ function editarUsuario(action) {
             securityStamp, twoFactorEnabled, selectRole
         },
         success: function (response) {
-            if (response == "Save") {
+            if (response === "Save") {
                 window.location.href = "Usuarios";
             }
             else {
