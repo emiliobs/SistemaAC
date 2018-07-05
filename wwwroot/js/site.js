@@ -3,6 +3,10 @@ $('#modalEditar').on('shown.bs.modal', function () {
     $('#myInput').focus();
 });
 
+$('#modalAC').on('shown.bs.modal', function () {
+    $('#Nombre').focus();
+});
+
 function getUsuario(id, action) {
     $.ajax({
         type: "POST",
