@@ -199,3 +199,13 @@ function eliminarUsuario(action) {
         }
     });
 }
+
+var agregarCategoria = () => {
+    var nombre = document.getElementById("Nombre").value;
+    var descripcion = document.getElementById("Descripcion").value;
+    var estados = document.getElementById('Estado');
+    var estado = estados.options[estados.selectedIndex].value;
+    var action = 'Categorias/guardarCategoria';
+    var categoria = new Categorias(nombre, descripcion, estado, action);
+    categoria.agregarCategoria();
+}
