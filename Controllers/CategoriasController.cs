@@ -22,9 +22,7 @@ namespace SistemaAC.Controllers
             _context = context;
             categoriaVewModel = new CategoriaVewModel(_context);
 
-        }
-
-
+        }  
 
         #region Metodos Utilizados
         // GET: Categorias
@@ -33,6 +31,10 @@ namespace SistemaAC.Controllers
             return View(await _context.Categoria.ToListAsync());
         }
 
+        public List<object[]> FiltrarDatos(int numPagina, string valor)
+        {
+            return categoriaVewModel.FiltrarDatos(numPagina, valor);
+        }
         public List<IdentityError> GuardarCategoria(string nombre, string descripcion, string estado)
         {
             return categoriaVewModel.GuardarCategoria(nombre, descripcion, estado);

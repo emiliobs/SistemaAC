@@ -15,7 +15,7 @@ namespace SistemaAC.ViewModels
         public CategoriaVewModel(ApplicationDbContext context)
         {
             this.context = context;
-            FiltrarDatos(1, "Android");
+            //FiltrarDatos(1, "Android");
         }
 
 
@@ -45,13 +45,13 @@ namespace SistemaAC.ViewModels
 
         public List<object[]> FiltrarDatos(int numPagina, string valor)
         {
-            int count = 0, cantidad, numRegistros = 0, inicio = 0, regPorPagina = 1, cantidadPaginas, 
+            int count = 0, cantidad, numRegistros = 0, inicio = 0, regPorPagina = 5, cantidadPaginas, 
                 paginas;
             string dataFilter = string.Empty, paginador = string.Empty, estado = null;
 
             List<object[]> data = new List<object[]>();
             IEnumerable<Categoria> query;
-            var categoria = context.Categoria.OrderBy(c => c.Nombre).ToList();
+            var categoria = context.Categoria.OrderBy(c => c.Nombre.ToUpper().Trim()).ToList();
             numRegistros = categoria.Count;
             inicio = (numPagina - 1) * regPorPagina;
             cantidadPaginas = (numRegistros / regPorPagina);
@@ -68,6 +68,32 @@ namespace SistemaAC.ViewModels
 
             cantidad = query.Count();
 
+            foreach (var cat in query)
+            {
+                if (cat.Estado == true)
+                {
+                    estado = "<a class = 'btn  btn-info'>Activo</a>";
+                }
+                else
+                {
+                    estado = "<a class = 'btn btn-default'>No Activo</a>";
+
+                }
+
+                dataFilter += "<tr>" + 
+                    
+                    "<td>" + cat.Nombre      + "</td>" + 
+                    "<td>" + cat.Descripcion + "</td>" + 
+                    "<td>" + estado + " </td>"     + 
+                    "<td>" + "<a data-toggle='modal' data-target='#myModal' class='btn btn-success'>Edit</a>|" +
+                    "<a data-toggle='modal' data-target='#myModal3' class='btn btn-danger' >Delete</a>" + 
+                    "</td>" + 
+                    
+                    "</tr>";
+            }
+
+            object[] dataObject = { dataFilter, paginador };
+            data.Add(dataObject);
             return data;
         }
 

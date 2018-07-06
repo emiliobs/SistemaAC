@@ -13,7 +13,7 @@
                 class="form-control" />
       </div>
 </div>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -49,7 +49,27 @@
             </tr>
         }
     </tbody>
+</table>*@
+
+<table class="table">
+    <thead>
+
+        <tr>
+        <td>Nombre</td>
+        <td>Descripción</td>
+        <td>Estado</td>
+        <td>Opciones</td>
+        </tr>
+
+    </thead>
+    <tbody id="resultSearch">
+
+    </tbody>
 </table>
+<div id="paginado">
+
+</div>
+
 @*Modal*@
 <div class="modal fade" id="modalAC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
