@@ -2,29 +2,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SistemaAC.Data;
 using SistemaAC.Models;
+using SistemaAC.ViewModels;
 
 namespace SistemaAC.Controllers
 {
     public class CategoriasController : Controller
     {
         private readonly ApplicationDbContext _context;
+        CategoriaVewModel categoriaVewModel;
 
         public CategoriasController(ApplicationDbContext context)
         {
             _context = context;
+            categoriaVewModel = new CategoriaVewModel(_context);
+
         }
 
+
+
+        #region Metodos Utilizados
         // GET: Categorias
         public async Task<IActionResult> Index()
         {
             return View(await _context.Categoria.ToListAsync());
         }
 
+        public List<IdentityError> GuardarCategoria(string nombre, string descripcion, string estado)
+        {
+            return categoriaVewModel.GuardarCategoria(nombre, descripcion, estado);
+
+        }
+
+        private bool CategoriaExists(int id)
+        {
+            return _context.Categoria.Any(e => e.CategoriaId == id);
+        }
+
+        #endregion
+
+        #region Metodos No Utilizados
         // GET: Categorias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -145,9 +167,7 @@ namespace SistemaAC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoriaExists(int id)
-        {
-            return _context.Categoria.Any(e => e.CategoriaId == id);
-        }
+        #endregion
+      
     }
 }

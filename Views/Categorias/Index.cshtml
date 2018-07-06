@@ -7,6 +7,12 @@
     @*<a asp-action="Create">Create New</a>*@
     <a data-toggle="modal" data-target="#modalAC" class="btn btn-info">Crear Categoría.</a>
 </p>
+<div class="form-group">
+      <div class="col-md-6">
+         <input id="filtrar" name="filtrar" placeholder="Buscar....." onkeyup="filtrarDatos(1);" 
+                class="form-control" />
+      </div>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -36,9 +42,9 @@
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.CategoriaId" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CategoriaId" class="btn btn-warning">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CategoriaId" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
